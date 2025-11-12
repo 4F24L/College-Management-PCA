@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Department {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  students  Student[]
+  faculties Faculty[]
+  nonTeachingStaff NonTeachingStaff[]
+}
+
+model Student {
+  id                 Int      @id @default(autoincrement())
+  firstName          String
+  lastName           String
+  rollNumber         String   @unique
+  email              String?  @unique
+  phone              String?
+  dateOfBirth        DateTime?
+  enrollmentDate     DateTime? @default(now())
+  departmentId       Int?
+  department         Department? @relation(fields: [departmentId], references: [id])
+  marks              Mark[]
+  placements         PlacementRecord[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Faculty {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String   @unique
+  phone       String?
+  qualification String?
+  hireDate    DateTime?
+  departmentId Int?
+  department  Department? @relation(fields: [departmentId], references: [id])
+}
+
+model Mark {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  student   Student  @relation(fields: [studentId], references: [id])
+  course    String
+  semester  Int
+  score     Float
+}
+
+model PlacementRecord {
+  id         Int      @id @default(autoincrement())
+  studentId  Int
+  student    Student  @relation(fields: [studentId], references: [id])
+  company    String
+  jobTitle   String
+  offerDate  DateTime?
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  firstName    String?
+  lastName     String?
+  role         String   @default("user")
+  createdAt    DateTime @default(now())
+}
+
+model NonTeachingStaff {
+  id          Int       @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String?   @unique
+  phone       String?
+  role        String?
+  departmentId Int?
+  department  Department? @relation(fields: [departmentId], references: [id])
+}
