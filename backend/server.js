@@ -19,7 +19,7 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => res.json({ status: 'ok', message: 'Anage backend running' }));
+app.get('/', (req, res) => res.json({ status: 'ok', message: 'GCELT PCA backend running' }));
 
 app.use('/api/students', studentsRouter);
 app.use('/api/faculties', facultiesRouter);
