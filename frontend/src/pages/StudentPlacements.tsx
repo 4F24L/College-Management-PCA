@@ -52,7 +52,7 @@ const StudentPlacements: React.FC = () => {
             <Input label="Offer Date" name="offerDate" type="date" value={form.offerDate} onChange={onChange} />
             <DialogFooter>
               <Button type="submit">Save</Button>
-              <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
             </DialogFooter>
           </form>
         </DialogContent>

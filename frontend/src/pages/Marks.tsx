@@ -79,7 +79,7 @@ const Marks: React.FC = () => {
             </div>
             <DialogFooter>
               <Button type="submit">Save</Button>
-              <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
             </DialogFooter>
           </form>
         </DialogContent>
