@@ -5,8 +5,3 @@
 
 [context.production.environment]
   NODE_VERSION = "18"
-
-
-[[redirects]]
-  from = "/*"
-  to = "/"
